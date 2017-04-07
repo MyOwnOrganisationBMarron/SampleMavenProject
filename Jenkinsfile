@@ -3,7 +3,7 @@ pipeline {
 
     stages {
         
-        stage 'Checkout'{
+        stage ('Checkout'){
             nodes{
                 node {
                     echo 'Checkout'
@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-        stage 'Build' {
+        stage ('Build') {
             nodes {
                 node {
                     unstash 'couroucoucou'
@@ -23,7 +23,7 @@ pipeline {
             }
         }
 
-        stage "Test" {
+        stage ('Test') {
             parallel 'testIE' : {
                 node {
                     echo 'Test'
@@ -36,7 +36,7 @@ pipeline {
         }
 
 
-        stage 'Package' {
+        stage ('Package') {
             nodes {
                 
                 node {
@@ -45,7 +45,7 @@ pipeline {
             }
         }
 
-        stage 'Deploy' {
+        stage ('Deploy') {
             
             input 'Go to Prod'
             node {
