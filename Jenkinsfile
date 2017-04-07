@@ -25,12 +25,16 @@ pipeline {
 
         stage ('Test') {
             parallel 'testIE' : {
-                steps {
+                node {
+                    steps {
                     echo 'Test'
+                    }
                 }
             }, 'testFirefox':{
-               steps {
+               node {
+                   steps {
                     echo 'Test'
+                   }
                 } 
             }
         }
