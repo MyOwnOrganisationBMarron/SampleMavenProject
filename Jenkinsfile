@@ -24,10 +24,9 @@ pipeline {
         }
 
         stage ('Test') {
-            parallel (
-     "Test IE" : { sh "echo p1; sleep 20s; echo phase1" },
-     "Test Firefox" : { sh "echo p2; sleep 40s; echo phase2" }
-   )
+             steps {
+                    echo 'Tests Browsers'
+                }
                  
   
         }
