@@ -47,7 +47,7 @@ pipeline {
 
         stage ('Deploy') {
             
-            input 'Go to Prod'
+            input ('Go to Prod')
             steps {
                 echo 'Déploiement'
             }
