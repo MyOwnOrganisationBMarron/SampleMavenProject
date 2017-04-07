@@ -5,7 +5,7 @@ pipeline {
         
         stage ('Checkout'){
             
-                node {
+                steps {
                     echo 'Checkout'
                     checkout([$class: 'SubversionSCM', additionalCredentials: [], excludedCommitMessages: '', excludedRegions: '', excludedRevprop: '', excludedUsers: '', filterChangelog: false, ignoreDirPropChanges: false, includedRegions: '', locations: [[credentialsId: 'c4534404-5d07-426a-a0ec-d3ef45fd9607', depthOption: 'infinity', ignoreExternalsOption: true, local: '.', remote: 'https://dev.dawan.fr/usvn/svn/test/trunk/sampleMavenProject@Head']], workspaceUpdater: [$class: 'UpdateUpdater']])
                     stash excludes: 'target/*', name: 'couroucoucou'
@@ -16,7 +16,7 @@ pipeline {
 
         stage ('Build') {
             
-                node {
+                steps {
                     unstash 'couroucoucou'
                     build 'Sample Project for training'
                 }
@@ -25,11 +25,11 @@ pipeline {
 
         stage ('Test') {
             parallel 'testIE' : {
-                node {
+                steps {
                     echo 'Test'
                 }
             }, 'testFirefox':{
-               node {
+               steps {
                     echo 'Test'
                 } 
             }
@@ -39,7 +39,7 @@ pipeline {
         stage ('Package') {
 
                 
-                node {
+                steps {
                     echo 'Paquetage'
                 }
          
@@ -48,7 +48,7 @@ pipeline {
         stage ('Deploy') {
             
             input 'Go to Prod'
-            node {
+            steps {
                 echo 'Déploiement'
             }
         }
